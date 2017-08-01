@@ -1,0 +1,15 @@
+{% for name, value in dataentry.items() %}
+<!-- <article> -->
+<!-- <li class="list-group-item"><p>{{name}}</p></li> -->
+<div class="col-md-4 col-sm-12 col-xs-12">
+	<div class="wow">
+		<div class="box text-left">
+			<p>icon</p>
+			<i>{{value["Quote"]}}</i>
+			<p>{{name}}</p>			
+		</div>
+	</div>
+</div>
+<!-- </article>-->
+{% endfor %}
+

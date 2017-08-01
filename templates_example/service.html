@@ -1,0 +1,12 @@
+{% for name, value in dataentry.items() %}
+<!-- <article> -->
+<div class="col-md-4 col-sm-6 col-xs-12">
+	<div class="wow">
+		<div class="box text-left">
+			<i class="fa fa-check fa-3x circled bg-skin">icon</i>
+			<h4 class="h-bold">{{name}}</h4>
+			<p>{{value["Summary"]}}</p>			
+		</div>
+	</div>
+</div>
+<!-- </article>-->{% endfor %}

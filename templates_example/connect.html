@@ -1,0 +1,8 @@
+{% for name, value in dataentry.items() %}
+<!-- <article> -->
+<!-- <li class="list-group-item"><p>{{name}}</p></li> -->
+<div class="box text-left">
+	<img href="{{value['Url']}}" src="{{value['Image']}}">{{name}}</img>
+</div>
+<!-- </article>-->
+{% endfor %}
