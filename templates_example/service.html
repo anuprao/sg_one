@@ -1,11 +1,12 @@
 {% for name, value in dataentry.items() %}
 <!-- <article> -->
-<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="col-md-4 col-sm-6 col-xs-6">
 	<div class="wow">
-		<div class="box text-left">
+		<div class="box text-center">
 			<i class="fa fa-check fa-3x circled bg-skin">icon</i>
 			<h4 class="h-bold">{{name}}</h4>
-			<p>{{value["Summary"]}}</p>			
+			<a href={{pageURL}}><span class="glyphicon glyphicon-new-window"></span></a>
+			<!-- <p>{{value["Summary"]}}</p> -->
 		</div>
 	</div>
 </div>

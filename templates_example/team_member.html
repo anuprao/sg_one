@@ -1,13 +1,13 @@
 {% for name, value in dataentry.items() %}
 <!-- <article> -->
 <!-- <li class="list-group-item"><p>{{name}}</p></li> -->
-<div class="col-md-3 col-sm-6 col-xs-12">
+<div class="col-md-3 col-sm-6 col-xs-6">
 	<div class="wow">
 		<div class="box text-center">
-			<strong>{{name}}</strong><br/>
+			<h3>{{name}}</h3><br/>
 			<i>{{value["Designation"]}}</i><br/><br/>
 			<p>{{value["About"]}}</p>
-			<a href={{LinkedinProfile}} ><span class="social social-linked-in">aaa</span></a>
+			<a href={{LinkedinProfile}}><span class="social social-linked-in">aaa</span></a>
 		</div>
 	</div>
 </div>

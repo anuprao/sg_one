@@ -59,6 +59,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 	strWebsitename = jd_config["websitename"]
 	strUrl = jd_config["url"]
 	strTollFreeNumber = jd_config["toll_free_number"]
+	strCopyright = jd_config["copyright"]
 	
 	#print(pageConfig)
 	#print(pageDefaultSchema)
@@ -170,7 +171,13 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 				pathTemplate = entryConfig["template"]
 				relpathTemplate = os.path.relpath(pathTemplate, pathTemplatesDir)
 				templateHTML_Footer = Template(templates[relpathTemplate])
-				htmlOutput_Footer = templateHTML_Footer.render(title=entryName, bShowTitle_Footer=bShowTitle, Websitename=strWebsitename, TollFreeNumber=strTollFreeNumber, articleContent=htmlOutput_Article_All)
+				htmlOutput_Footer = templateHTML_Footer.render(
+					title=entryName, 
+					bShowTitle_Footer=bShowTitle, 
+					Websitename=strWebsitename, 
+					TollFreeNumber=strTollFreeNumber, 
+					Copyright=strCopyright,
+					articleContent=htmlOutput_Article_All)
 					
 				strMainBody = strMainBody + htmlOutput_Footer
 			
