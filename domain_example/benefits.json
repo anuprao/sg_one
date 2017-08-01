@@ -1,0 +1,37 @@
+{
+	"Benefit1" :  
+	{
+		"Image" : "abcdefg",
+		"Summary" : "abcdefg"
+	},
+	
+	"Benefit2" :  
+	{
+		"Image" : "hijklmn",
+		"Summary" : "hijklmn"
+	},
+	
+	"Benefit3" :  
+	{
+		"Image" : "opqrstu",
+		"Summary" : "opqrstu"
+	},
+	
+	"Benefit4" :  
+	{
+		"Image" : "abcdefg",
+		"Summary" : "abcdefg"
+	},
+	
+	"Benefit5" :  
+	{
+		"Image" : "hijklmn",
+		"Summary" : "hijklmn"
+	},
+	
+	"Benefit6" :  
+	{
+		"Image" : "opqrstu",
+		"Summary" : "opqrstu"
+	}	
+}

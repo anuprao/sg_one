@@ -1,0 +1,161 @@
+{
+	"title" : "Sample Company",
+	
+	"websitename" : "Sample Company",
+	
+	"url" : "Samplecompany.com", 
+	
+	"toll_free_number" : "+1 800 000 0000",
+	
+	"pages" : 
+	{
+		"#default" : 
+		{
+			"template" : "templates/page.html",
+						
+			"header_and_navbar" : 
+			{
+				"ShowTitle" : false,
+				
+				"template" : "templates/navbar.html"	
+			},
+			
+			"sections" : 
+			{
+				"ShowTitle" : false
+			},
+			
+			"footer" : 
+			{
+				"ShowTitle" : false,
+				
+				"template" : "templates/footer.html",
+				
+				"articles" : 
+				{
+					"Information" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/information_all.html",
+						
+						"template_entry" : "templates/information.html",
+				
+						"data" : "../common/information.json"
+					},					
+					
+					"Our Locations" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/contacts_all.html",
+						
+						"template_entry" : "templates/contact.html",
+				
+						"data" : "../common/contacts.json"
+					},
+				
+					"Follow us on" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/connects_all.html",
+						
+						"template_entry" : "templates/connect.html",
+						
+						"data" : "../common/connects.json"
+					}
+				}				
+			}
+		},
+		
+		"index.html" : 
+		{			
+			"sections" : 
+			{
+				"scrollbanner" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/scrollbanner_all.html",
+					
+					"template_entry" : "templates/scrollbanner.html",
+										
+					"data" : "scrollbanner.json"
+				},
+				
+				"Benefits" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/benefits_all.html",
+					
+					"template_entry" : "templates/benefit.html",
+										
+					"data" : "benefits.json"
+				},
+				
+				"Services" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/services_all.html",
+					
+					"template_entry" : "templates/service.html",
+										
+					"data" : "services.json"
+				},
+				
+				"Recommendations" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/recommendations_all.html",
+					
+					"template_entry" : "templates/recommendation.html",
+										
+					"data" : "recommendations.json"
+				}
+			}		
+		},
+		
+		"aboutus.html" : 
+		{
+			"sections" : 
+			{
+				"scrollbanner" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/scrollbanner_all.html",
+					
+					"template_entry" : "templates/scrollbanner.html",
+										
+					"data" : "scrollbanner.json"
+				},
+								
+				"overview" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/overview_all.html",
+					
+					"template_entry" : "templates/overview.html",
+					
+					"data" : "overview.json"
+				},
+				
+				"The Team" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/team_all.html",
+					
+					"template_entry" : "templates/team_member.html",
+					
+					"data" : "../common/team.json"
+				}			
+			}			
+		}
+	}
+}
