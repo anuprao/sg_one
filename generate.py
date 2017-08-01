@@ -191,16 +191,6 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 		########################################################################################################################
 		
 		htmlOutput = templateHTML.render(Title=strTitle, MainBody=strMainBody)
-		'''
-			Header=dictBody['Header'], 
-			ScrollBanner=strScrollBanner, 
-			Benefits=strBenefits, 
-			Services=strServices, 
-			Recommendations=strRecommendations, 
-			TheTeam=strTheTeam, 
-			ContactUs=strContactUs, 
-			Footer=strFooter)
-		'''
 		#print(htmlOutput)
 			
 	print()
