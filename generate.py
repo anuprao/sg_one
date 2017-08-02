@@ -49,6 +49,16 @@ def getEntry(dictDefault, dictMain, keyName):
 			
 	return strReturn
 
+def getMarkdownFromFile(markdowner, pathDomainDir, pathMd):
+	
+	fullpathMd = os.path.join(pathDomainDir, pathMd)
+	fileMD = open(fullpathMd,'rt')					
+	strMd = fileMD.read()
+	fileMD.close()
+	
+	strHtml = markdowner.convert(strMd)
+	return strHtml
+
 def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 	global templates
 	global pathTemplatesDir
@@ -117,6 +127,32 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 
 					jd_dataentry = json.loads(jd_dataentry_str, object_pairs_hook=OrderedDict)					
 					#print(Fore.BLUE + str(jd_dataentry))
+					
+					#######################################################################################################
+					
+					# Simple iterator for processing two level markdown reference in json
+					markdowner = Markdown()
+					sampleKeys = list(jd_dataentry.keys())
+					for jsKey in sampleKeys:
+						jsValue = jd_dataentry[jsKey]
+						
+						if "md_" == jsKey[0:3] :
+							#print(jsKey)
+							mdContent = getMarkdownFromFile(markdowner, pathDomainDir, jsValue)
+							jd_dataentry[jsKey] = mdContent
+							
+						else:
+							subEntry = jsValue
+							sampleKeys2 = list(subEntry.keys())
+							for jsKey2 in sampleKeys2:
+								jsValue2 = subEntry[jsKey2]
+								
+								if "md_" == jsKey2[0:3] :
+									#print(jsKey2)
+									mdContent = getMarkdownFromFile(markdowner, pathDomainDir, jsValue2)
+									subEntry[jsKey2] = mdContent
+					
+					#######################################################################################################
 					
 					htmlOutput_DataEntry = templateHTML_SectionEntry.render(dataentry=jd_dataentry)
 					#print(htmlOutput_Section)
@@ -206,8 +242,6 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 
 def processConfig(pathConfig, pathOutputDir):
 	global templates
-	
-	markdowner = Markdown()
 	
 	fileJSON = open(pathConfig,'rt')					
 	jd_config_str = fileJSON.read()

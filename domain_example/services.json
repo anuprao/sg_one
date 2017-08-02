@@ -1,37 +1,37 @@
 {
-	"Service1" :  
+	"Service1 abcdefg abcdefg abcdefg" :  
 	{
-		"Image" : "abcdefg",
+		"Image" : "static/images/sampleservice.png",
 		"Summary" : "abcdefg"
 	},
 	
-	"Service2" :  
+	"Service2 hijklmn hijklmn hijklmn" :  
 	{
-		"Image" : "hijklmn",
+		"Image" : "static/images/sampleservice.png",
 		"Summary" : "hijklmn"
 	},
 	
-	"Service3" :  
+	"Service3 opqrstu opqrstu opqrstu" :  
 	{
-		"Image" : "opqrstu",
+		"Image" : "static/images/sampleservice.png",
 		"Summary" : "opqrstu"
 	},
 	
-	"Service4" :  
+	"Service4 abcdefg abcdefg abcdefg" :  
 	{
-		"Image" : "abcdefg",
+		"Image" : "static/images/sampleservice.png",
 		"Summary" : "abcdefg"
 	},
 	
-	"Service5" :  
+	"Service5 hijklmn hijklmn hijklmn" :  
 	{
-		"Image" : "hijklmn",
+		"Image" : "static/images/sampleservice.png",
 		"Summary" : "hijklmn"
 	},
 	
-	"Service6" :  
+	"Service6 opqrstu opqrstu opqrstu" :  
 	{
-		"Image" : "opqrstu",
+		"Image" : "static/images/sampleservice.png",
 		"Summary" : "opqrstu"
 	}	
 }

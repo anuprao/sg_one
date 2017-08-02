@@ -1,13 +1,13 @@
 {
-	"title" : "Sample Company",
+	"title" : "SampleCompany Healthcare",
 	
-	"websitename" : "Sample Company",
+	"websitename" : "SampleCompany",
 	
-	"url" : "Samplecompany.com", 
+	"url" : "SampleCompanyit.com", 
 	
 	"toll_free_number" : "+1 800 000 0000",
 	
-	"copyright" : "Copyrights © 2017. All Rights Reserved. Sample Company",
+	"copyright" : "© Copyrights 2017. All Rights Reserved. SampleCompany Software Consultancy Private Limited.",
 	
 	"pages" : 
 	{
@@ -35,7 +35,7 @@
 				
 				"articles" : 
 				{
-					"Information" : 
+					"INFORMATION" : 
 					{
 						"ShowTitle" : true,
 						
@@ -46,7 +46,7 @@
 						"data" : "../common/information.json"
 					},					
 					
-					"Our Locations" : 
+					"USA" : 
 					{
 						"ShowTitle" : true,
 						
@@ -54,10 +54,21 @@
 						
 						"template_entry" : "templates/contact.html",
 				
-						"data" : "../common/contacts.json"
+						"data" : "../common/USA.json"
+					},
+					
+					"INDIA" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/contacts_all.html",
+						
+						"template_entry" : "templates/contact.html",
+				
+						"data" : "../common/INDIA.json"
 					},
 				
-					"Follow us on" : 
+					"FOLLOW US" : 
 					{
 						"ShowTitle" : true,
 						
@@ -88,7 +99,7 @@
 				
 				"Benefits" : 
 				{
-					"ShowTitle" : true,
+					"ShowTitle" : false,
 					
 					"template" : "templates/benefits_all.html",
 					
