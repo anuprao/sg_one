@@ -1,8 +1,9 @@
 {% for name, value in dataentry.items() %}
 <!-- <article> -->
 <!-- <li class="list-group-item"><p>{{name}}</p></li> -->
-<div class="box text-left">
-	<img href="{{value['Url']}}" src="{{value['Image']}}"></img><div class="information">{{name}}</div>
-</div>
+<!-- <div class="box text-left"> -->
+<!--<img href="{{value['Url']}}" src="{{value['Image']}}"></img><!-- <div class="information">{{name}}</div> -->
+<!-- </div> -->
 <!-- </article>-->
+<img class="information_right" href="{{value['Url']}}" src="{{value['Image']}}"></img>
 {% endfor %}
