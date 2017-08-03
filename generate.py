@@ -27,6 +27,7 @@ from jinja2 import Template
 extJSON = '.json'
 extMD = '.md'
 
+tagData = "data"
 tagSections = "sections"
 tagArticles = "articles"
 tagFooter = "footer"
@@ -59,6 +60,81 @@ def getMarkdownFromFile(markdowner, pathDomainDir, pathMd):
 	strHtml = markdowner.convert(strMd)
 	return strHtml
 
+def getProcessedJsonData(pathDomainDir, nodeConfig):
+	fnDataEntry = nodeConfig[tagData]
+	#print(fnDataEntry)
+	
+	pathEntry = nodeConfig["template_entry"]
+	relpathEntry = os.path.relpath(pathEntry, pathTemplatesDir)
+	templateHTML_nodeEntry = Template(templates[relpathEntry])
+	
+	absfnDataEntry = os.path.join(pathDomainDir, fnDataEntry)
+	fdDataEntry = open(absfnDataEntry,'rt')					
+	jd_dataentry_str = fdDataEntry.read()
+	fdDataEntry.close()
+	
+	jd_dataentry = json.loads(jd_dataentry_str, object_pairs_hook=OrderedDict)					
+	
+	#######################################################################################################
+	
+	# Simple iterator for processing two level markdown reference in json
+	markdowner = Markdown()
+	sampleKeys = list(jd_dataentry.keys())
+	for jsKey in sampleKeys:
+		jsValue = jd_dataentry[jsKey]
+		
+		if "md_" == jsKey[0:3] :
+			#print(jsKey)
+			mdContent = getMarkdownFromFile(markdowner, pathDomainDir, jsValue)
+			jd_dataentry[jsKey] = mdContent
+			
+		else:
+			subEntry = jsValue
+			sampleKeys2 = list(subEntry.keys())
+			for jsKey2 in sampleKeys2:
+				jsValue2 = subEntry[jsKey2]
+				
+				if "md_" == jsKey2[0:3] :
+					#print(jsKey2)
+					mdContent = getMarkdownFromFile(markdowner, pathDomainDir, jsValue2)
+					subEntry[jsKey2] = mdContent
+	
+	#######################################################################################################
+	
+	htmlOutput_DataEntry_All = ''
+	for name, value in jd_dataentry.items():
+		htmlOutput_DataEntry = templateHTML_nodeEntry.render(name=name, value=value)
+		htmlOutput_DataEntry_All = htmlOutput_DataEntry_All + htmlOutput_DataEntry
+		
+	return htmlOutput_DataEntry_All
+		
+def getProcessedArticles(pathDomainDir, nodeConfig):
+	htmlOutput_Article_All = ''	
+	for ArticleName, ArticleConfig in nodeConfig[tagArticles].items():
+		print("ArticleName", ArticleName)
+		
+		strShowTitle = ArticleConfig["ShowTitle"]
+		bShowTitle = False
+		if True == strShowTitle:
+			bShowTitle = True
+		del ArticleConfig["ShowTitle"]
+						
+		pathTemplate = ArticleConfig["template"]
+		relpathTemplate = os.path.relpath(pathTemplate, pathTemplatesDir)
+		templateHTML_Article = Template(templates[relpathTemplate])
+		
+		htmlOutput_ArticleEntry_All = ''
+		if tagData in ArticleConfig:
+			htmlOutput_ArticleEntry_All = getProcessedJsonData(pathDomainDir, ArticleConfig)
+			#print(htmlOutput_ArticleEntry_All)
+		
+		htmlOutput_Article = templateHTML_Article.render(title=ArticleName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_ArticleEntry_All)
+		#print(htmlOutput_Article)
+		
+		htmlOutput_Article_All = htmlOutput_Article_All + htmlOutput_Article
+					
+	return htmlOutput_Article_All
+					
 def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 	global templates
 	global pathTemplatesDir
@@ -66,10 +142,12 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 	global tagSections
 	
 	strTitle = jd_config["title"]
-	strWebsitename = jd_config["websitename"]
+	strTagline = jd_config["tagline"]
+	strBannerLogo = jd_config["bannerlogo"]
 	strUrl = jd_config["url"]
 	strTollFreeNumber = jd_config["toll_free_number"]
 	strCopyright = jd_config["copyright"]
+	strWebsitename = jd_config["websitename"]
 	
 	#print(pageConfig)
 	#print(pageDefaultSchema)
@@ -113,52 +191,15 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 					relpathTemplate = os.path.relpath(pathTemplate, pathTemplatesDir)
 					templateHTML_Section = Template(templates[relpathTemplate])
 					
-					pathEntry = SectionConfig["template_entry"]
-					relpathEntry = os.path.relpath(pathEntry, pathTemplatesDir)
-					templateHTML_SectionEntry = Template(templates[relpathEntry])
+					htmlOutput_SectionEntry_All = ''
 					
-					fnDataEntry = SectionConfig["data"]
-					#print(fnDataEntry)
-					
-					absfnDataEntry = os.path.join(pathDomainDir, fnDataEntry)
-					fdDataEntry = open(absfnDataEntry,'rt')					
-					jd_dataentry_str = fdDataEntry.read()
-					fdDataEntry.close()
-
-					jd_dataentry = json.loads(jd_dataentry_str, object_pairs_hook=OrderedDict)					
-					#print(Fore.BLUE + str(jd_dataentry))
-					
-					#######################################################################################################
-					
-					# Simple iterator for processing two level markdown reference in json
-					markdowner = Markdown()
-					sampleKeys = list(jd_dataentry.keys())
-					for jsKey in sampleKeys:
-						jsValue = jd_dataentry[jsKey]
-						
-						if "md_" == jsKey[0:3] :
-							#print(jsKey)
-							mdContent = getMarkdownFromFile(markdowner, pathDomainDir, jsValue)
-							jd_dataentry[jsKey] = mdContent
-							
-						else:
-							subEntry = jsValue
-							sampleKeys2 = list(subEntry.keys())
-							for jsKey2 in sampleKeys2:
-								jsValue2 = subEntry[jsKey2]
-								
-								if "md_" == jsKey2[0:3] :
-									#print(jsKey2)
-									mdContent = getMarkdownFromFile(markdowner, pathDomainDir, jsValue2)
-									subEntry[jsKey2] = mdContent
-					
-					#######################################################################################################
-					
-					htmlOutput_DataEntry = templateHTML_SectionEntry.render(dataentry=jd_dataentry)
-					#print(htmlOutput_Section)
+					if tagData in SectionConfig:
+						htmlOutput_SectionEntry_All = getProcessedJsonData(pathDomainDir, SectionConfig)
+					elif tagArticles in SectionConfig:
+						htmlOutput_SectionEntry_All = getProcessedArticles(pathDomainDir, SectionConfig)
 					
 					#print("bShowTitle",bShowTitle)
-					htmlOutput_Section = templateHTML_Section.render(title=SectionName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_DataEntry)
+					htmlOutput_Section = templateHTML_Section.render(title=SectionName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_SectionEntry_All)
 					#print(htmlOutput_Section)
 					
 					strMainBody = strMainBody + htmlOutput_Section
@@ -169,7 +210,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 				
 				htmlOutput_Article_All = ''	
 				for ArticleName, ArticleConfig in entryConfig[tagArticles].items():
-					print("ArticleName", ArticleName)
+					#print("ArticleName", ArticleName)
 					
 					strShowTitle = ArticleConfig["ShowTitle"]
 					bShowTitle = False
@@ -180,27 +221,15 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 					pathTemplate = ArticleConfig["template"]
 					relpathTemplate = os.path.relpath(pathTemplate, pathTemplatesDir)
 					templateHTML_Article = Template(templates[relpathTemplate])
-						
-					pathEntry = ArticleConfig["template_entry"]
-					relpathEntry = os.path.relpath(pathEntry, pathTemplatesDir)
-					templateHTML_SectionEntry = Template(templates[relpathEntry])
 					
-					fnDataEntry = ArticleConfig["data"]
-					#print(fnDataEntry)
+					htmlOutput_ArticleEntry_All = ''
+					if tagData in ArticleConfig:
+						htmlOutput_ArticleEntry_All = getProcessedJsonData(pathDomainDir, ArticleConfig)
 					
-					absfnDataEntry = os.path.join(pathDomainDir, fnDataEntry)
-					fdDataEntry = open(absfnDataEntry,'rt')					
-					jd_dataentry_str = fdDataEntry.read()
-					fdDataEntry.close()
-
-					jd_dataentry = json.loads(jd_dataentry_str, object_pairs_hook=OrderedDict)					
-					#print(jd_dataentry)
-					
-					htmlOutput_DataEntry = templateHTML_SectionEntry.render(dataentry=jd_dataentry)
-					#print(htmlOutput_DataEntry)
-					
-					htmlOutput_Article = templateHTML_Article.render(title=ArticleName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_DataEntry)
+					htmlOutput_Article = templateHTML_Article.render(title=ArticleName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_ArticleEntry_All)
 					#print(htmlOutput_Article)
+					
+					#######################################################################################################
 					
 					htmlOutput_Article_All = htmlOutput_Article_All + htmlOutput_Article
 					
@@ -210,9 +239,9 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 				htmlOutput_Footer = templateHTML_Footer.render(
 					title=entryName, 
 					bShowTitle_Footer=bShowTitle, 
-					Websitename=strWebsitename, 
 					TollFreeNumber=strTollFreeNumber, 
 					Copyright=strCopyright,
+					Websitename=strWebsitename,
 					articleContent=htmlOutput_Article_All)
 					
 				strMainBody = strMainBody + htmlOutput_Footer
@@ -223,7 +252,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 					relpathTemplate = os.path.relpath(pathTemplate, pathTemplatesDir)
 					templateHTML_Entry = Template(templates[relpathTemplate])
 					
-					htmlOutput_Entry = templateHTML_Entry.render(Websitename=strWebsitename, TollFreeNumber=strTollFreeNumber)
+					htmlOutput_Entry = templateHTML_Entry.render(tagline=strTagline, bannerlogo=strBannerLogo, Websitename=strWebsitename, TollFreeNumber=strTollFreeNumber)
 					#print(htmlOutput_Entry)
 					
 					strMainBody = strMainBody + htmlOutput_Entry
