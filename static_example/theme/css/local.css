@@ -330,6 +330,17 @@ footer p {
 	margin-bottom: 0px;
 }
 
+footer a {
+	color: #f0f0f0;
+}
+
+footer a:visited {
+	color: #f0f0f0;
+}
+
+footer a:hover {
+	color: #d0d0d0;
+}
 
 .paradetail {
 	font-weight : 300;
