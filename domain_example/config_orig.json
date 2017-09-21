@@ -1,0 +1,224 @@
+{
+	"title" : "Bluematrix",
+	
+	"tagline" : ".. for perfect clinical documentation",
+	
+	"bannerlogo" : "static/images/BluematrixLogo.png",
+	
+	"url" : "bluematrixit.com", 
+	
+	"toll_free_number" : "+1 800 000 0000",
+	
+	"copyright" : "© Copyrights 2017. All Rights Reserved. Bluematrix Software Consultancy Private Limited.",
+	
+	"websitename" : "Bluematrixit",
+	
+	"pages" : 
+	{
+		"#default" : 
+		{
+			"template" : "templates/page.html",
+						
+			"header_and_navbar" : 
+			{
+				"ShowTitle" : false,
+				
+				"template" : "templates/navbar.html"	
+			},
+			
+			"sections" : 
+			{
+				"ShowTitle" : false
+			},
+			
+			"footer" : 
+			{
+				"ShowTitle" : false,
+				
+				"template" : "templates/footer.html",
+				
+				"articles" : 
+				{				
+					
+					"USA" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/contacts_all.html",
+						
+						"template_entry" : "templates/contact.html",
+				
+						"data" : "../common/USA.json"
+					},
+					
+					"INDIA" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/contacts_all.html",
+						
+						"template_entry" : "templates/contact.html",
+				
+						"data" : "../common/INDIA.json"
+					},
+
+					"REACH US" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/information_all.html",
+						
+						"template_entry" : "templates/information.html",
+				
+						"data" : "../common/information.json"
+					},	
+									
+					"FOLLOW US" : 
+					{
+						"ShowTitle" : true,
+						
+						"template" : "templates/connects_all.html",
+						
+						"template_entry" : "templates/connect.html",
+						
+						"data" : "../common/connects.json"
+					}
+				}				
+			}
+		},
+		
+		"index.html" : 
+		{			
+			"sections" : 
+			{
+				"scrollbanner" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/scrollbanner_all.html",
+					
+					"template_entry" : "templates/scrollbanner.html",
+										
+					"data" : "scrollbanner.json"
+				},
+				
+				"Benefits" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/benefits_all.html",
+					
+					"template_entry" : "templates/benefit.html",
+										
+					"data" : "benefits.json"
+				},	
+								
+				"Avantages" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/advantages_all.html",
+					
+					"template_entry" : "templates/advantage.html",
+										
+					"data" : "advantages.json"
+				},							
+				
+				"Services" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/services_all.html",
+					
+					"template_entry" : "templates/service.html",
+										
+					"data" : "services.json"
+				},
+				
+				"Recommendations" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/recommendations_all.html",
+					
+					"template_entry" : "templates/recommendation.html",
+										
+					"data" : "recommendations.json"
+				}
+			}		
+		},
+			
+		"aboutus.html" : 
+		{
+			"sections" : 
+			{								
+				"overview" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/overview_all.html",
+					
+					"template_entry" : "templates/overview.html",
+					
+					"data" : "overview.json"
+				},
+				
+				"Leadership" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/team_all.html",
+					
+					"template_entry" : "templates/team_member.html",
+					
+					"data" : "../common/team.json"
+				}			
+			}									
+		},
+		
+		"services.html" : 
+		{
+			"sections" : 
+			{							
+				"overview" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/overview_all.html",
+					
+					"template_entry" : "templates/overview.html",
+					
+					"data" : "services_pitch.json"
+				}			
+			}									
+		},
+		
+		"career.html" : 
+		{
+			"sections" : 
+			{								
+				"career_pitch" : 
+				{
+					"ShowTitle" : false,
+					
+					"template" : "templates/overview_all.html",
+					
+					"template_entry" : "templates/overview.html",
+					
+					"data" : "career_pitch.json"
+				},
+				
+				"Current Openings" : 
+				{
+					"ShowTitle" : true,
+					
+					"template" : "templates/vacancies_all.html",
+					
+					"template_entry" : "templates/vacancy.html",
+					
+					"data" : "../common/vacancies.json"
+				}			
+			}									
+		}				
+	}
+}
