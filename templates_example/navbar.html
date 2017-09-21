@@ -1,10 +1,11 @@
 <nav class="navbar navbar-transparent">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="glyphicon glyphicon-menu-hamburger"></span> 
+			<button type="button" class="navbar-toggle hamburger" data-toggle="collapse" data-target="#myNavbar">
+				<i class="fa fa-bars fa-2x"></i>
 			</button>
-			<a class="navbar-brand" href="#">{{Websitename}}</a>
+			<a class="navbar-brand" href="#"><img src="{{bannerlogo}}"></img></a>
+			<div class="tagline" ><p>{{tagline}}</p></div>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<!-- <ul class="nav navbar-nav">
@@ -14,10 +15,12 @@
 				<li><a href="#">Page 3</a></li> 
 			</ul> 
 			-->
+			
 			<ul class="nav navbar-nav navbar-right">
-				<li><a class="text-right" href="#">Home</a></li> 
-				<li><a class="text-right" href="#">About Us</a></li> 
-				<li><a class="text-right" href="tel:{{TollFreeNumber}}" target="_self"><span class="glyphicon glyphicon-phone"></span>{{TollFreeNumber}}</a></li>
+				<li {% if currPage == 'index' %} class="active" {% endif %} ><a class="menu_entry text-center" href="{{ hrefFilenames['index'] }}">Home</a></li> 
+				<li {% if currPage == 'aboutus' %} class="active" {% endif %}><a class="menu_entry text-center" href="{{ hrefFilenames['aboutus'] }}">About Us</a></li>
+				<li {% if currPage == 'services' %} class="active" {% endif %}><a class="menu_entry text-center" href="{{ hrefFilenames['services'] }}">Services</a></li>
+				<li {% if currPage == 'careers' %} class="active" {% endif %}><a class="menu_entry text-center" href="{{ hrefFilenames['careers'] }}">Careers</a></li>
 			</ul>      
 		</div>
 	</div>

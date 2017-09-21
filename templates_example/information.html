@@ -1,8 +1,13 @@
-{% for name, value in dataentry.items() %}
 <!-- <article> -->
 <!-- <li class="list-group-item"><p>{{name}}</p></li> -->
 <div class="box text-left">
-	<i class="fa {{value['Image']}} fa-1x" aria-hidden="true"></i><div class="information">{{value['Text']}}</div>
+	<i class="fa {{value['Image']}} fa-1x" aria-hidden="true"></i>
+	<div class="information">
+		{% if "Phone" == name %}
+		<a href="tel:{{value['Text']}}" target="_self">{{value['Text']}}</a>
+		{% elif "Email" == name %}
+		<a href="mailto:{{value['Text']}}" target="_self">{{value['Text']}}</a>
+		{% endif %}
+	</div>
 </div>
 <!-- </article>-->
-{% endfor %}

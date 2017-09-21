@@ -1,16 +1,13 @@
-{% for name, value in dataentry.items() %}
-<!-- <article> -->
-<!-- <li class="list-group-item"><p>{{name}}</p></li> -->
 <div class="col-md-3 col-sm-6 col-xs-12">
-	<div class="wow teammember">
-		<div class="box text-center">
-			<img class="img-responsive" src="{{value['Image']}}"></img>
-			<h3>{{name}}</h3><br/>
-			<i>{{value["Designation"]}}</i><br/><br/>
+	<div class="box teammember">
+		<div class="col-md-12 col-sm-12 col-xs-6 image-container">
+			<img src="{{value['Image']}}" class="img-responsive imground" />
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-6">  
+			<h3>{{name}}</h3>
+			<i class="teammember_designation">{{value["Designation"]}}</i><br/>
+			<a class="teammember_social" href="{{value['Linkedin_profile']}}"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
 			<p>{{value["md_About"]}}</p>
-			<a href="{{value['Linkedin_profile']}}"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
 		</div>
 	</div>
 </div>
-<!-- </article>-->
-{% endfor %}

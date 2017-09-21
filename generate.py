@@ -13,7 +13,6 @@ import os.path
 import shutil
 
 import json
-
 from collections import OrderedDict
 
 import copy
@@ -35,6 +34,7 @@ tagTemplate = "template"
 
 pathTemplatesDir = "templates"
 templates = {}
+listGenOutput_Filenames = {}
 
 pathStatic = "static"
 
@@ -73,7 +73,7 @@ def getProcessedJsonData(pathDomainDir, nodeConfig):
 	jd_dataentry_str = fdDataEntry.read()
 	fdDataEntry.close()
 	
-	jd_dataentry = json.loads(jd_dataentry_str, object_pairs_hook=OrderedDict)					
+	jd_dataentry = json.loads(jd_dataentry_str, object_pairs_hook=OrderedDict)	
 	
 	#######################################################################################################
 	
@@ -135,8 +135,9 @@ def getProcessedArticles(pathDomainDir, nodeConfig):
 					
 	return htmlOutput_Article_All
 					
-def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
+def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config, currPage):
 	global templates
+	global listGenOutput_Filenames
 	global pathTemplatesDir
 	
 	global tagSections
@@ -146,6 +147,9 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 	strBannerLogo = jd_config["bannerlogo"]
 	strUrl = jd_config["url"]
 	strTollFreeNumber = jd_config["toll_free_number"]
+	strEmailId = jd_config["email_id"]
+	strLinkedInProfile = jd_config["linked_in_profile"]
+	strTwitterPosts = jd_config["twitter_posts"]
 	strCopyright = jd_config["copyright"]
 	strWebsitename = jd_config["websitename"]
 	
@@ -252,7 +256,18 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 					relpathTemplate = os.path.relpath(pathTemplate, pathTemplatesDir)
 					templateHTML_Entry = Template(templates[relpathTemplate])
 					
-					htmlOutput_Entry = templateHTML_Entry.render(tagline=strTagline, bannerlogo=strBannerLogo, Websitename=strWebsitename, TollFreeNumber=strTollFreeNumber)
+					#print(listGenOutput_Filenames)
+					
+					htmlOutput_Entry = templateHTML_Entry.render(
+						tagline=strTagline, 
+						bannerlogo=strBannerLogo, 
+						Websitename=strWebsitename, 
+						TollFreeNumber=strTollFreeNumber, 
+						EmailId=strEmailId,
+						LinkedInProfile=strLinkedInProfile,
+						TwitterPosts=strTwitterPosts,
+						hrefFilenames=listGenOutput_Filenames,
+						currPage=currPage)
 					#print(htmlOutput_Entry)
 					
 					strMainBody = strMainBody + htmlOutput_Entry
@@ -271,6 +286,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config):
 
 def processConfig(pathConfig, pathOutputDir):
 	global templates
+	global listGenOutput_Filenames
 	
 	fileJSON = open(pathConfig,'rt')					
 	jd_config_str = fileJSON.read()
@@ -297,11 +313,16 @@ def processConfig(pathConfig, pathOutputDir):
 	os.mkdir(pathOutputDir)
 	
 	########################################################################################################################
+	
+	for pageName, pageConfig in jd_pages.items():
 		
+		fnOutput = pageName
+		listGenOutput_Filenames[pageName[:-5]] = fnOutput
+	
 	for pageName, pageConfig in jd_pages.items():
 		print(Fore.GREEN + pageName)
 		
-		htmlOutput = processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config)
+		htmlOutput = processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config, pageName[:-5])
 		
 		fnOutput = os.path.join(pathOutputDir, pageName)
 		fdHtml = open(fnOutput,'wt')

@@ -2,36 +2,36 @@
 	"Benefit1" :  
 	{
 		"Image" : "abcdefg",
-		"Summary" : "HIPAA Compliant"
+		"Summary" : "Exclusive single point of contact"
 	},
 	
 	"Benefit2" :  
 	{
 		"Image" : "hijklmn",
-		"Summary" : "24/7 support with 100% uptime"
+		"Summary" : "Highest standards of Quality Assurance"
 	},
 	
 	"Benefit3" :  
 	{
 		"Image" : "opqrstu",
-		"Summary" : "Committed TAT adherence"
+		"Summary" : "Seasoned Professionals"
 	},
 	
 	"Benefit4" :  
 	{
 		"Image" : "abcdefg",
-		"Summary" : "Quality and Consistency"
+		"Summary" : "Platform-agnostic approach"
 	},
 	
 	"Benefit5" :  
 	{
 		"Image" : "hijklmn",
-		"Summary" : "On-Demand scalable services"
+		"Summary" : "Industry grade best practices"
 	},
 	
 	"Benefit6s" :  
 	{
 		"Image" : "opqrstu",
-		"Summary" : "Extensive domain expertise"
+		"Summary" : "Competent cost offering"
 	}	
 }
