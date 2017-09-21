@@ -103,12 +103,13 @@ def getProcessedJsonData(pathDomainDir, nodeConfig):
 	
 	htmlOutput_DataEntry_All = ''
 	for name, value in jd_dataentry.items():
-		htmlOutput_DataEntry = templateHTML_nodeEntry.render(name=name, value=value)
+		htmlOutput_DataEntry = templateHTML_nodeEntry.render(name=name, value=value, hrefLinks=listGenOutput_Filenames)
 		htmlOutput_DataEntry_All = htmlOutput_DataEntry_All + htmlOutput_DataEntry
 		
 	return htmlOutput_DataEntry_All
 		
 def getProcessedArticles(pathDomainDir, nodeConfig):
+	global listGenOutput_Filenames
 	htmlOutput_Article_All = ''	
 	for ArticleName, ArticleConfig in nodeConfig[tagArticles].items():
 		print("ArticleName", ArticleName)
@@ -128,7 +129,7 @@ def getProcessedArticles(pathDomainDir, nodeConfig):
 			htmlOutput_ArticleEntry_All = getProcessedJsonData(pathDomainDir, ArticleConfig)
 			#print(htmlOutput_ArticleEntry_All)
 		
-		htmlOutput_Article = templateHTML_Article.render(title=ArticleName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_ArticleEntry_All)
+		htmlOutput_Article = templateHTML_Article.render(title=ArticleName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_ArticleEntry_All, hrefLinks=listGenOutput_Filenames)
 		#print(htmlOutput_Article)
 		
 		htmlOutput_Article_All = htmlOutput_Article_All + htmlOutput_Article
@@ -203,7 +204,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config, currPag
 						htmlOutput_SectionEntry_All = getProcessedArticles(pathDomainDir, SectionConfig)
 					
 					#print("bShowTitle",bShowTitle)
-					htmlOutput_Section = templateHTML_Section.render(title=SectionName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_SectionEntry_All)
+					htmlOutput_Section = templateHTML_Section.render(title=SectionName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_SectionEntry_All, hrefLinks=listGenOutput_Filenames)
 					#print(htmlOutput_Section)
 					
 					strMainBody = strMainBody + htmlOutput_Section
@@ -230,7 +231,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config, currPag
 					if tagData in ArticleConfig:
 						htmlOutput_ArticleEntry_All = getProcessedJsonData(pathDomainDir, ArticleConfig)
 					
-					htmlOutput_Article = templateHTML_Article.render(title=ArticleName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_ArticleEntry_All)
+					htmlOutput_Article = templateHTML_Article.render(title=ArticleName, bShowTitle=bShowTitle, dataentry_all=htmlOutput_ArticleEntry_All, hrefLinks=listGenOutput_Filenames)
 					#print(htmlOutput_Article)
 					
 					#######################################################################################################
@@ -246,6 +247,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config, currPag
 					TollFreeNumber=strTollFreeNumber, 
 					Copyright=strCopyright,
 					Websitename=strWebsitename,
+					hrefLinks=listGenOutput_Filenames,
 					articleContent=htmlOutput_Article_All)
 					
 				strMainBody = strMainBody + htmlOutput_Footer
@@ -266,7 +268,7 @@ def processPage(pathDomainDir, pageConfig, pageDefaultSchema, jd_config, currPag
 						EmailId=strEmailId,
 						LinkedInProfile=strLinkedInProfile,
 						TwitterPosts=strTwitterPosts,
-						hrefFilenames=listGenOutput_Filenames,
+						hrefLinks=listGenOutput_Filenames,
 						currPage=currPage)
 					#print(htmlOutput_Entry)
 					

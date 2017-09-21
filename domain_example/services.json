@@ -3,34 +3,39 @@
 	{
 		"Image" : "static/images/MedicalTranscription.png",
 		"Summary" : "abcdefg",
-		"md_About" : "MedicalTranscription.md"
+		"md_About" : "MedicalTranscription.md",
+		"anchorRef" : "MedicalTranscription"
 	},
 	
 	"Medical Coding" :  
 	{
 		"Image" : "static/images/MedicalCoding.png",
 		"Summary" : "hijklmn",
-		"md_About" : "MedicalCoding.md"
+		"md_About" : "MedicalCoding.md",
+		"anchorRef" : "MedicalCoding"
 	},
 	
 	"Medical Billing" :  
 	{
 		"Image" : "static/images/MedicalBilling.png",
 		"Summary" : "opqrstu",
-		"md_About" : "MedicalBilling.md"
+		"md_About" : "MedicalBilling.md",
+		"anchorRef" : "MedicalBilling"
 	},
 	
 	"Claims Processing" :  
 	{
 		"Image" : "static/images/ClaimsProcessing.png",
 		"Summary" : "abcdefg",
-		"md_About" : "ClaimsProcessing.md"
+		"md_About" : "ClaimsProcessing.md",
+		"anchorRef" : "ClaimsProcessing"
 	},
 	
 	"A/R Follow-ups and Denial Management" :  
 	{
 		"Image" : "static/images/AR_Follow_ups_and_Denial_Management.png",
 		"Summary" : "hijklmn",
-		"md_About" : "AR_Follow_ups_and_Denial_Management.md"
+		"md_About" : "AR_Follow_ups_and_Denial_Management.md",
+		"anchorRef" : "AR_Follow_ups_and_Denial_Management"
 	}	
 }
